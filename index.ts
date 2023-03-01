@@ -1,6 +1,5 @@
 import express from "express";
 import axios from "axios";
-import puppeteer from "puppeteer";
 import { ProductsDatas } from "./helpers/static_data";
 const app = express();
 
@@ -13,39 +12,6 @@ export const config = {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
-async function generateOpenGraphImage(
-  imageUrl: String,
-  title: String,
-  price: String
-): Promise<Buffer> {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-
-  const html = `
-    <html>
-      <head>
-        <meta property="og:title" content="My Page Title" />
-        <meta property="og:image" content="https://example.com/my-image.png" />
-      </head>
-      <body>
-        <img src="${imageUrl}" alt="product image"/>
-        <p>${title}</p>
-        <p>${price}</p>
-      </body>
-    </html>
-  `;
-
-  await page.setContent(html);
-  const screenshot = await page.screenshot({
-    type: "png",
-    encoding: "binary",
-    fullPage: true,
-  });
-
-  await browser.close();
-  return screenshot;
-}
 
 app.get("/reco/product-card/click/:index", async (req, res) => {
   try {
