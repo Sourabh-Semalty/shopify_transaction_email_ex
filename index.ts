@@ -41,12 +41,12 @@ app.get("/reco/product-card/render/:index", async (req, res) => {
     const currentProd = ProductsDatas[strProdIds][parseInt(index, 10)];
 
     const data = await axios.get(
-      `http://localhost:3000/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`,
+      `https://vercelog-image-generator.vercel.app/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`,
       { responseType: "arraybuffer" }
     );
-    // console.log(
-    //   `http://localhost:3000/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`
-    // );
+    console.log(
+      `https://vercelog-image-generator.vercel.app/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`
+    );
     // const imageData = Buffer.from(data.data, "binary").toString("base64");
 
     // res.send(`data:image/png;base64,${imageData}`);
