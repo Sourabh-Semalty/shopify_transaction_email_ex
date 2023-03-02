@@ -13,8 +13,8 @@ export const ProductsDatas: ProductData = {
       title: "ADIDAS | CLASSIC BACKPACK",
       handle: "adidas-classic-backpack",
       image:
-        "https://cdn.shopify.com/s/files/1/0715/5738/2429/products/85cc58608bf138a50036bcfe86a3a362.jpg?v=1676544365",
-      price: "440",
+        "https://idestiny.in/wp-content/uploads/2022/09/r1594_Blue_PDP_Image_Position-1A_Avail__en-IN.jpg",
+      price: "111",
     },
     {
       title: "NIKE | SWOOSH PRO FLAT PEAK CAP",

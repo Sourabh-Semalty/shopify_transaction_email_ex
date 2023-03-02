@@ -1,13 +1,14 @@
+import { config } from "dotenv";
 import express from "express";
 import axios from "axios";
 import { ProductsDatas } from "./helpers/static_data";
 const app = express();
 
-const SHOP = "local-cc-1.myshopify.com";
+const ENV = config().parsed;
 
-export const config = {
-  runtime: "experimental-edge",
-};
+import pMemoize from "p-memoize";
+
+const SHOP = "local-cc-1.myshopify.com";
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -40,17 +41,18 @@ app.get("/reco/product-card/render/:index", async (req, res) => {
 
     const currentProd = ProductsDatas[strProdIds][parseInt(index, 10)];
 
-    const data = await axios.get(
-      `https://vercelog-image-generator.vercel.app/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`,
+    console.log(process.env);
+    const { data } = await axios.get(
+      `${ENV.IMAGE_GEN_URL}/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`,
       { responseType: "arraybuffer" }
     );
-    console.log(
-      `https://vercelog-image-generator.vercel.app/api/og?title=${currentProd.title}&price=${currentProd.price}&image_url=${currentProd.image}`
-    );
-    // const imageData = Buffer.from(data.data, "binary").toString("base64");
 
-    // res.send(`data:image/png;base64,${imageData}`);
-    res.send(data.data);
+    res.writeHead(200, {
+      "Content-Type": "image/png", // Replace with the appropriate image file type
+      "Content-Length": data.length,
+    });
+    res.end(Buffer.from(data));
+    // res.send(data.data);
   } catch (error) {
     if (error instanceof Error) res.status(500).send(error.message);
     return;
