@@ -12,8 +12,7 @@ export const ProductsDatas: ProductData = {
     {
       title: "ADIDAS | CLASSIC BACKPACK",
       handle: "adidas-classic-backpack",
-      image:
-        "https://idestiny.in/wp-content/uploads/2022/09/r1594_Blue_PDP_Image_Position-1A_Avail__en-IN.jpg",
+      image: "https://idestiny.in/wp-content/uploads/2022/09/iPhone-14-1.png",
       price: "111",
     },
     {
